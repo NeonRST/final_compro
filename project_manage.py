@@ -5,7 +5,16 @@ __location__ = os.path.realpath(
     os.path.join(os.getcwd(), os.path.dirname(__file__)))
 # define a funcion called initializing
 
-def initializing():
+def initializing(_exit=True):
+    while _exit:
+        read_csv()
+
+# here are things to do in this function:
+
+    # create an object to read all csv files that will serve as a persistent state for this program
+
+
+def read_csv():
     Users = []
     with open(os.path.join(__location__, 'login.csv')) as f:
         rows = csv.DictReader(f)
@@ -19,16 +28,40 @@ def initializing():
         data_list.append(temp_list)
     return data_list
 
-# here are things to do in this function:
-
-    # create an object to read all csv files that will serve as a persistent state for this program
-
     # create all the corresponding tables for those csv files
 
-    # see the guide how many tables are needed
 
-    # add all these tables to the database
+def read_project():
+    Projects = []
+    with open(os.path.join(__location__, 'project.csv')) as f:
+        rows = csv.DictReader(f)
+        for r in rows:
+            Projects.append(dict(r))
+    data_list = []
+    for i in Projects:
+        temp_list = []
+        for key, val in i.items():
+            temp_list.append(val)
+        data_list.append(temp_list)
+    print(data_list)
+    print(Projects)
+    print("hello")
+    return data_list
 
+
+def read_Member_pending_request():
+    Member_pending_requests = []
+    with open(os.path.join(__location__, 'member_pending_request.csv')) as f:
+        rows = csv.DictReader(f)
+        for r in rows:
+            Member_pending_requests.append(dict(r))
+    data_list = []
+    for i in Member_pending_requests:
+        temp_list = []
+        for key, val in i.items():
+            temp_list.append(val)
+        data_list.append(temp_list)
+    return data_list
 
 # define a funcion called login
 userlist = initializing()
