@@ -1,6 +1,6 @@
 <h1> Proposal </h1>
 
-<h2> objective: </h2>
+<h2> Objective: </h2>
 
 to create a project management system for senior projects
 the system will be user-friendly with the main focus on

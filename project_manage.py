@@ -1,9 +1,23 @@
 # import database module
+import csv, os
 
+__location__ = os.path.realpath(
+    os.path.join(os.getcwd(), os.path.dirname(__file__)))
 # define a funcion called initializing
 
 def initializing():
-    pass
+    Users = []
+    with open(os.path.join(__location__, 'login.csv')) as f:
+        rows = csv.DictReader(f)
+        for r in rows:
+            Users.append(dict(r))
+    data_list = []
+    for i in Users:
+        temp_list = []
+        for key, val in i.items():
+            temp_list.append(val)
+        data_list.append(temp_list)
+    return data_list
 
 # here are things to do in this function:
 
@@ -17,9 +31,29 @@ def initializing():
 
 
 # define a funcion called login
+userlist = initializing()
 
-def login():
-    pass
+
+def login(user_csv):
+    login_name = input("enter your name: ")
+    login_password = input("enter your password: ")
+    log = False
+    pos = 0
+    for i in user_csv:
+        if login_name == i[1] and login_password == i[2]:
+            log = True
+            break
+        pos += 1
+    if not log:
+        print("login in failed")
+        return None
+    if log:
+        print("login in successful")
+        print(f"logged in as {user_csv[pos][1]}")
+        print(f"ID: {user_csv[pos][0]}")
+        print(f"Role: {user_csv[pos][3]}")
+        return {user_csv[pos][0]}, {user_csv[pos][3]}
+
 
 # here are things to do in this function:
    # add code that performs a login task
@@ -27,7 +61,8 @@ def login():
         # returns [ID, role] if valid, otherwise returning None
 
 # define a function called exit
-def exit():
+
+def exits():
     pass
 
 # here are things to do in this function:
@@ -39,23 +74,22 @@ def exit():
 
 # make calls to the initializing and login functions defined above
 
-initializing()
-val = login()
+# initializing()
+# val = login()
 
 # based on the return value for login, activate the code that performs activities according to the role defined for that person_id
 
 # if val[1] = 'admin':
-    # see and do admin related activities
+#     see and do admin related activities
 # elif val[1] = 'student':
-    # see and do student related activities
+#     see and do student related activities
 # elif val[1] = 'member':
-    # see and do member related activities
+#     see and do member related activities
 # elif val[1] = 'lead':
-    # see and do lead related activities
+#     see and do lead related activities
 # elif val[1] = 'faculty':
-    # see and do faculty related activities
+#     see and do faculty related activities
 # elif val[1] = 'advisor':
-    # see and do advisor related activities
+#     see and do advisor related activities
 
 # once everyhthing is done, make a call to the exit function
-exit()
