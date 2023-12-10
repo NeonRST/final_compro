@@ -5,18 +5,27 @@ import os
 __location__ = os.path.realpath(
     os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
-persons = []
-with open(os.path.join(__location__, 'persons.csv')) as f:
-    rows = csv.DictReader(f)
-    for r in rows:
-        persons.append(dict(r))
 
-login = []
-with open(os.path.join(__location__, 'login.csv')) as f:
-    rows = csv.DictReader(f)
-    for r in rows:
-        login.append(dict(r))
-print(login)
+class CSV:
+    def __init__(self, csv_file):
+        self.csv_file = csv_file
+        self.csv_dict = []
+        self.csv_list = []
+        with open(os.path.join(__location__, self.csv_file)) as f:
+            rows = csv.DictReader(f)
+            for r in rows:
+                self.csv_dict.append(dict(r))
+        for i in self.csv_dict:
+            temp_list = []
+            for key, val in i.items():
+                temp_list.append(val)
+            self.csv_list.append(temp_list)
+
+
+#
+# x = CSV('login.csv')
+# print(x.csv_list)
+
 # add in code for a Database class
 
 # add in code for a Table class

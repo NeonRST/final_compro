@@ -1,75 +1,25 @@
 # import database module
 import csv, os
+import database
 
 __location__ = os.path.realpath(
     os.path.join(os.getcwd(), os.path.dirname(__file__)))
 # define a funcion called initializing
 
-def initializing(_exit=True):
-    while _exit:
-        read_csv()
+# def initializing(_exit=True):
+#     while _exit:
+#         read_csv()
 
 # here are things to do in this function:
 
-    # create an object to read all csv files that will serve as a persistent state for this program
-
-
-def read_csv():
-    Users = []
-    with open(os.path.join(__location__, 'login.csv')) as f:
-        rows = csv.DictReader(f)
-        for r in rows:
-            Users.append(dict(r))
-    data_list = []
-    for i in Users:
-        temp_list = []
-        for key, val in i.items():
-            temp_list.append(val)
-        data_list.append(temp_list)
-    return data_list
-
-    # create all the corresponding tables for those csv files
-
-
-def read_project():
-    Projects = []
-    with open(os.path.join(__location__, 'project.csv')) as f:
-        rows = csv.DictReader(f)
-        for r in rows:
-            Projects.append(dict(r))
-    data_list = []
-    for i in Projects:
-        temp_list = []
-        for key, val in i.items():
-            temp_list.append(val)
-        data_list.append(temp_list)
-    print(data_list)
-    print(Projects)
-    print("hello")
-    return data_list
-
-
-def read_Member_pending_request():
-    Member_pending_requests = []
-    with open(os.path.join(__location__, 'member_pending_request.csv')) as f:
-        rows = csv.DictReader(f)
-        for r in rows:
-            Member_pending_requests.append(dict(r))
-    data_list = []
-    for i in Member_pending_requests:
-        temp_list = []
-        for key, val in i.items():
-            temp_list.append(val)
-        data_list.append(temp_list)
-    return data_list
-
-# define a funcion called login
-userlist = initializing()
+# create an object to read all csv files that will serve as a persistent state for this program
 
 
 def login(user_csv):
-    login_name = input("enter your name: ")
-    login_password = input("enter your password: ")
+    print("Senior project managing program")
+    print()
+    login_name = input("Username: ")
+    login_password = input("Password: ")
     log = False
     pos = 0
     for i in user_csv:
@@ -78,14 +28,41 @@ def login(user_csv):
             break
         pos += 1
     if not log:
+        print()
         print("login in failed")
         return None
     if log:
+        print()
         print("login in successful")
+        print()
         print(f"logged in as {user_csv[pos][1]}")
         print(f"ID: {user_csv[pos][0]}")
         print(f"Role: {user_csv[pos][3]}")
-        return {user_csv[pos][0]}, {user_csv[pos][3]}
+        return {user_csv[pos][0]}, {user_csv[pos][3]}, True
+    # create all the corresponding tables for those csv files
+
+
+class Project:
+    def __init__(self, project_id_num, title, lead_member, member1, member2, advisor):
+        self.project_id_num = project_id_num
+        self.title = title
+        self.lead_member = lead_member
+        self.member1 = member1
+        self.member2 = member2
+        self.advisor = advisor
+        self.status = "pending"
+
+    def create_project(self):
+        data_to_append = [self.project_id_num, self.title, self.lead_member, self.member1, self.member2, self.advisor, self.status]
+        file = open('project.csv', 'a', newline='')
+        writer = csv.writer(file)
+        writer.writerow(data_to_append)
+
+    def pro_check(self, project_id):
+        project_data = database.CSV('project.csv')
+        for i in project_data:
+
+# define a funcion called login
 
 
 # here are things to do in this function:
