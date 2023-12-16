@@ -50,7 +50,26 @@ class Project:
         writer.writerow(data_to_append)
 
 
+class Invite:
+    def __init__(self, project_id,inviter, to_be,response,response_date):
+        self.project_id = project_id
+        self.inviter = inviter
+        self.to_be_member = to_be
+        self.to_be_advisor = to_be
+        self.response = response
+        self.response_date = response_date
 
+    def create_invite_member(self):
+        data_to_append = [self.project_id, self.inviter, self.to_be_member, self.response, self.response_date]
+        file = open('member_pending_request.csv', 'a', newline='')
+        writer = csv.writer(file)
+        writer.writerow(data_to_append)
+
+    def create_invite_advisor(self):
+        data_to_append = [self.project_id, self.to_be_advisor, self.response, self.response_date]
+        file = open('advisor_pending_request.csv', 'a', newline='')
+        writer = csv.writer(file)
+        writer.writerow(data_to_append)
 # define a funcion called login
 
 

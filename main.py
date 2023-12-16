@@ -13,6 +13,12 @@ while run:
     project_data = CSV('project.csv')
     project_data_list = CSV.csv_list(project_data)
     project_data_dict = CSV.csv_dict(project_data)
+    member_pending_request = CSV('member_pending_request.csv')
+    member_pending_request_list = CSV.csv_list(member_pending_request)
+    member_pending_request_dict = CSV.csv_dict(member_pending_request)
+    advisor_pending_request = CSV('advisor_pending_request.csv')
+    advisor_pending_request_list = CSV.csv_list(advisor_pending_request)
+    advisor_pending_request_dict = CSV.csv_dict(advisor_pending_request)
     login_current_user = project_manage.login(login_data_list)
     role_allow = login_current_user[3]
     run_system = login_current_user[4]
@@ -22,7 +28,11 @@ while run:
         if role_allow == "student":
             print("accessed as student")
             user = role_access.Student(login_current_user, login_data_dict, project_data_list,
-                                       project_data_dict)
+                                       project_data_dict,
+                                       member_pending_request_list,
+                                       member_pending_request_dict,
+                                       advisor_pending_request_list,
+                                       advisor_pending_request_dict)
             student_edit = True
         while student_edit:
             page1 = user.page1()
