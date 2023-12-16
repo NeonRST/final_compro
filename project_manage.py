@@ -4,15 +4,6 @@ import database
 
 __location__ = os.path.realpath(
     os.path.join(os.getcwd(), os.path.dirname(__file__)))
-# define a funcion called initializing
-
-# def initializing(_exit=True):
-#     while _exit:
-#         read_csv()
-
-# here are things to do in this function:
-
-# create an object to read all csv files that will serve as a persistent state for this program
 
 
 def login(user_csv):
@@ -38,12 +29,12 @@ def login(user_csv):
         print(f"logged in as {user_csv[pos][1]}")
         print(f"ID: {user_csv[pos][0]}")
         print(f"Role: {user_csv[pos][3]}")
-        return {user_csv[pos][0]}, {user_csv[pos][1]}, {user_csv[pos][2]}, {user_csv[pos][3]}, True
+        return [user_csv[pos][0], user_csv[pos][1], user_csv[pos][2], user_csv[pos][3], True]
     # create all the corresponding tables for those csv files
 
 
 class Project:
-    def __init__(self, project_id_num, title, lead_member, member1, member2, advisor):
+    def __init__(self, project_id_num=000, title="", lead_member="", member1="", member2="", advisor=""):
         self.project_id_num = project_id_num
         self.title = title
         self.lead_member = lead_member
