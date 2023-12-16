@@ -38,7 +38,7 @@ def login(user_csv):
         print(f"logged in as {user_csv[pos][1]}")
         print(f"ID: {user_csv[pos][0]}")
         print(f"Role: {user_csv[pos][3]}")
-        return {user_csv[pos][0]}, {user_csv[pos][3]}, True
+        return {user_csv[pos][0]}, {user_csv[pos][1]}, {user_csv[pos][2]}, {user_csv[pos][3]}, True
     # create all the corresponding tables for those csv files
 
 
@@ -58,9 +58,7 @@ class Project:
         writer = csv.writer(file)
         writer.writerow(data_to_append)
 
-    def pro_check(self, project_id):
-        project_data = database.CSV('project.csv')
-        for i in project_data:
+
 
 # define a funcion called login
 
