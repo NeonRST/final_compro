@@ -24,27 +24,29 @@ advisor_pending_request_dict = CSV.csv_dict(advisor_pending_request)
 def login(user_csv):
     print("Senior project managing program")
     print()
-    login_name = input("Username: ")
-    login_password = input("Password: ")
+    # login_name = input("Username: ")
+    # login_password = input("Password: ")
     log = False
+    lgn = True
     pos = 0
-    for i in user_csv:
-        if login_name == i[1] and login_password == i[2]:
-            log = True
-            break
-        pos += 1
-    if not log:
-        print()
-        print("login in failed")
-        return None
-    if log:
-        print()
-        print("login in successful")
-        print()
-        print(f"logged in as {user_csv[pos][1]}")
-        print(f"ID: {user_csv[pos][0]}")
-        print(f"Role: {user_csv[pos][3]}")
-        return [user_csv[pos][0], user_csv[pos][1], user_csv[pos][2], user_csv[pos][3], True]
+    while login_data_dict:
+        login_name = input("Username: ")
+        login_password = input("Password: ")
+        for i in user_csv:
+            if login_name == i["username"] and login_password == i["password"]:
+                log = True
+        if log:
+            print()
+            print("login in successful")
+            print()
+            print(f"logged in as {user_csv[pos][1]}")
+            print(f"ID: {user_csv[pos][0]}")
+            print(f"Role: {user_csv[pos][3]}")
+            return [user_csv[pos][0], user_csv[pos][1], user_csv[pos][2], user_csv[pos][3], True]
+        else:
+            print("login in failed")
+            print()
+            print("try again")
     # create all the corresponding tables for those csv files
 
 
@@ -116,9 +118,55 @@ class ConfirmInvite:
         file = open('member_pending_request.csv', 'w', newline='')
         writer = csv.writer(file)
         writer.writerow(["ProjectID", "Inviter", "to_be_member", "Response", "Response_date"])
+        #update data
+        for i in project_data_dict:
+            if i["ProjectID"] == self.project_id:
+                print(i)
+                ans = input("enter accepted or denied: ")
+                if i["member1"] == "None":
+                    i.update({"member1": ans})
+                elif i["member2"] == "None":
+                    i.update({"member2": ans})
+                else:
+                    print("project empty")
         for dictionary in member_pending_request_dict:
             writer.writerow(dictionary.values())
         file.close()
+        file = open('project.csv', 'w', newline='')
+        writer = csv.writer(file)
+        writer.writerow(['ProjectID', 'Title', 'Lead', 'Member1', 'Member2', 'Advisor', 'Status'])
+        for dictionary in project_data_dict:
+            writer.writerow(dictionary.values())
+        file.close()
+
+    def respond_invite_advisor(self):
+        for i in advisor_pending_request_dict:
+            if i["ProjectID"] == self.project_id:
+                print(i)
+                ans = input("enter accepted or denied: ")
+                i.update({"Response": ans})
+        file = open('advisor_pending_request.csv', 'w', newline='')
+        writer = csv.writer(file)
+        writer.writerow(["ProjectID", "Inviter", "to_be_advisor", "Response", "Response_date"])
+        #update data
+        for i in project_data_dict:
+            if i["ProjectID"] == self.project_id:
+                print(i)
+                ans = input("enter accepted or denied: ")
+                if i["advisor"] == "None":
+                    i.update({"member1": ans})
+                else:
+                    print("advisor full")
+        for dictionary in advisor_pending_request_dict:
+            writer.writerow(dictionary.values())
+        file.close()
+        file = open('project.csv', 'w', newline='')
+        writer = csv.writer(file)
+        writer.writerow(['ProjectID', 'Title', 'Lead', 'Member1', 'Member2', 'Advisor', 'Status'])
+        for dictionary in project_data_dict:
+            writer.writerow(dictionary.values())
+        file.close()
+
 
 
 # here are things to do in this function:

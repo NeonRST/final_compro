@@ -6,11 +6,9 @@ from csv_extract import CSV
 
 run = True
 while run:
-    login_data = CSV('login.csv')
-    login_data_list = CSV.csv_list(login_data)
-    login_current_user = project_manage.login(login_data_list)
-    role_allow = login_current_user[3]
-    run_system = login_current_user[4]
+    project_manage.login()
+    role_allow = [3]
+    run_system = [4]
     while run_system:
         user = role_access.Default
         student_edit = False

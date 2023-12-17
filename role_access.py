@@ -83,30 +83,22 @@ class Student:
                             page1_2 = False
                     while page1_2_2:
                         print("what would you like to change page 1_2_2")
-                        print("invite Member1 = 1")
-                        print("invite Member2 = 2")
-                        print("invite Advisor = 3")
-                        print("change status = 4")
+                        print("invite Member = 1")
+                        print("invite Advisor = 2")
+                        print("change status = 3")
                         change_page_1_2_2 = input("input:")
                         if change_page_1_2_2 == "1":
                             member_code = input("member ID: ")
                             member1_invite = project_manage.Invite(access_project, self.login_data_list[0], member_code, "pending", datetime.date.today())
                             member1_invite.create_invite_member()
                         if change_page_1_2_2 == "2":
-                            member_code = input("member ID: ")
-                            member2_invite = project_manage.Invite(access_project,
-                                                                   self.login_data_list[0],
-                                                                   member_code, "pending",
-                                                                   datetime.date.today())
-                            member2_invite.create_invite_member()
-                        if change_page_1_2_2 == "3":
                             advisor_code = input("Advisor ID: ")
                             advisor_invite = project_manage.Invite(access_project,
                                                                    self.login_data_list[0],
                                                                    advisor_code, "pending",
                                                                    datetime.date.today())
                             advisor_invite.create_invite_advisor()
-                        if change_page_1_2_2 == "4":
+                        if change_page_1_2_2 == "3":
                             pass
                         page1_2_2 = False
 
