@@ -21,37 +21,36 @@ advisor_pending_request_dict = CSV.csv_dict(advisor_pending_request)
 # define a function called login
 
 
-def login(user_csv):
+def login():
     print("Senior project managing program")
     print()
     # login_name = input("Username: ")
     # login_password = input("Password: ")
-    log = False
-    lgn = True
-    pos = 0
-    while login_data_dict:
+
+    while True:
+        log = False
         login_name = input("Username: ")
         login_password = input("Password: ")
-        for i in user_csv:
+        for i in login_data_dict:
             if login_name == i["username"] and login_password == i["password"]:
                 log = True
-        if log:
-            print()
-            print("login in successful")
-            print()
-            print(f"logged in as {user_csv[pos][1]}")
-            print(f"ID: {user_csv[pos][0]}")
-            print(f"Role: {user_csv[pos][3]}")
-            return [user_csv[pos][0], user_csv[pos][1], user_csv[pos][2], user_csv[pos][3], True]
-        else:
-            print("login in failed")
-            print()
-            print("try again")
+                if log:
+                    print()
+                    print("login in successful")
+                    print()
+                    print(f"logged in as " + i["username"])
+                    print(f"ID: " + i["ID"])
+                    print(f"Role: " + i["role"])
+                    return True, i
+        print("login in failed")
+        print()
+        print("try again")
     # create all the corresponding tables for those csv files
 
 
 class Project:
-    def __init__(self, project_id_num=000, title="", lead_member="", member1="", member2="", advisor=""):
+    def __init__(self, project_id_num=000, title="", lead_member="", member1="", member2="",
+                 advisor=""):
         self.project_id_num = project_id_num
         self.title = title
         self.lead_member = lead_member
@@ -61,8 +60,10 @@ class Project:
         self.status = "pending"
 
     def create_project(self):
+        print(project_data_dict)
         project_data_dict.append({'ProjectID': f"{self.project_id_num}",'Title': f"{self.title}",
-                                'Lead': f"{self.lead_member}","Member1": f"{self.member1}","Member2": f"{self.member2}","Advisor": f"{self.advisor}",
+                                'Lead': f"{self.lead_member}","Member1": f"{self.member1}",
+                                  "Member2": f"{self.member2}","Advisor": f"{self.advisor}",
                                 "Status": f"{self.status}"})
         file = open('project.csv', 'w', newline='')
         writer = csv.writer(file)
@@ -73,7 +74,7 @@ class Project:
 
 
 class Invite:
-    def __init__(self, project_id,inviter, to_be,response,response_date):
+    def __init__(self, project_id, inviter, to_be,response,response_date):
         self.project_id = project_id
         self.inviter = inviter
         self.to_be_member = to_be
@@ -95,7 +96,7 @@ class Invite:
     def create_invite_advisor(self):
         advisor_pending_request_dict.append(
             {'ProjectID': f"{self.project_id}", 'Inviter': f"{self.inviter}",
-             'to_be_member': f"{self.to_be_advisor}", "Response": f"{self.response}",
+             'to_be_advisor': f"{self.to_be_advisor}", "Response": f"{self.response}",
              "Response_date": f"{self.response_date}"})
         file = open('advisor_pending_request.csv', 'w', newline='')
         writer = csv.writer(file)
@@ -106,32 +107,33 @@ class Invite:
 
 
 class ConfirmInvite:
-    def __init__(self, project_id):
+    def __init__(self, project_id, status=""):
         self.project_id = project_id
+        self.status = status
 
     def respond_invite_member(self):
-        for i in member_pending_request_dict:
-            if i["ProjectID"] == self.project_id:
-                print(i)
+        for i in range(len(member_pending_request_dict)):
+            if member_pending_request_dict[i]["ProjectID"] == self.project_id:
                 ans = input("enter accepted or denied: ")
-                i.update({"Response": ans})
+                member_pending_request_dict[i].update({"Response": ans})
         file = open('member_pending_request.csv', 'w', newline='')
         writer = csv.writer(file)
         writer.writerow(["ProjectID", "Inviter", "to_be_member", "Response", "Response_date"])
-        #update data
-        for i in project_data_dict:
-            if i["ProjectID"] == self.project_id:
-                print(i)
-                ans = input("enter accepted or denied: ")
-                if i["member1"] == "None":
-                    i.update({"member1": ans})
-                elif i["member2"] == "None":
-                    i.update({"member2": ans})
-                else:
-                    print("project empty")
         for dictionary in member_pending_request_dict:
             writer.writerow(dictionary.values())
         file.close()
+        #update data
+        for i in range(len(project_data_dict)):
+            print(project_data_dict[i]["ProjectID"])
+            if project_data_dict[i]["ProjectID"] == self.project_id:
+                ans = input("enter Your ID to confirm (ex.1111111): ")
+                print(project_data_dict)
+                if project_data_dict[i]["Member1"] == "None":
+                    project_data_dict[i].update({"Member1": ans})
+                elif project_data_dict[i]["Member2"] == "None":
+                    project_data_dict[i].update({"Member2": ans})
+                else:
+                    print("project empty")
         file = open('project.csv', 'w', newline='')
         writer = csv.writer(file)
         writer.writerow(['ProjectID', 'Title', 'Lead', 'Member1', 'Member2', 'Advisor', 'Status'])
@@ -140,26 +142,36 @@ class ConfirmInvite:
         file.close()
 
     def respond_invite_advisor(self):
-        for i in advisor_pending_request_dict:
-            if i["ProjectID"] == self.project_id:
-                print(i)
+        for i in range(len(advisor_pending_request_dict)):
+            if advisor_pending_request_dict[i]["ProjectID"] == self.project_id:
                 ans = input("enter accepted or denied: ")
-                i.update({"Response": ans})
+                advisor_pending_request_dict[i].update({"Response": ans})
         file = open('advisor_pending_request.csv', 'w', newline='')
         writer = csv.writer(file)
         writer.writerow(["ProjectID", "Inviter", "to_be_advisor", "Response", "Response_date"])
-        #update data
-        for i in project_data_dict:
-            if i["ProjectID"] == self.project_id:
-                print(i)
-                ans = input("enter accepted or denied: ")
-                if i["advisor"] == "None":
-                    i.update({"member1": ans})
-                else:
-                    print("advisor full")
         for dictionary in advisor_pending_request_dict:
             writer.writerow(dictionary.values())
         file.close()
+        #update data
+        for i in range(len(project_data_dict)):
+            if project_data_dict[i]["ProjectID"] == self.project_id:
+                ans = input("enter Your ID to confirm (ex.1111111): ")
+                print(project_data_dict)
+                if project_data_dict[i]["Advisor"] == "None":
+                    project_data_dict[i].update({"Advisor": ans})
+                else:
+                    print("advisor full")
+        file = open('project.csv', 'w', newline='')
+        writer = csv.writer(file)
+        writer.writerow(['ProjectID', 'Title', 'Lead', 'Member1', 'Member2', 'Advisor', 'Status'])
+        for dictionary in project_data_dict:
+            writer.writerow(dictionary.values())
+        file.close()
+
+    def respond_status(self):
+        for i in range(len(project_data_dict)):
+            if project_data_dict[i]["ProjectID"] == self.project_id:
+                project_data_dict[i].update({"Status": self.status})
         file = open('project.csv', 'w', newline='')
         writer = csv.writer(file)
         writer.writerow(['ProjectID', 'Title', 'Lead', 'Member1', 'Member2', 'Advisor', 'Status'])
