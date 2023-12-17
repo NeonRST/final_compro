@@ -1,9 +1,24 @@
 # import database module
 import csv, os
-import database
+from csv_extract import CSV
 
 __location__ = os.path.realpath(
     os.path.join(os.getcwd(), os.path.dirname(__file__)))
+
+login_data = CSV('login.csv')
+login_data_list = CSV.csv_list(login_data)
+login_data_dict = CSV.csv_dict(login_data)
+project_data = CSV('project.csv')
+project_data_list = CSV.csv_list(project_data)
+project_data_dict = CSV.csv_dict(project_data)
+member_pending_request = CSV('member_pending_request.csv')
+member_pending_request_list = CSV.csv_list(member_pending_request)
+member_pending_request_dict = CSV.csv_dict(member_pending_request)
+advisor_pending_request = CSV('advisor_pending_request.csv')
+advisor_pending_request_list = CSV.csv_list(advisor_pending_request)
+advisor_pending_request_dict = CSV.csv_dict(advisor_pending_request)
+
+# define a function called login
 
 
 def login(user_csv):
@@ -44,10 +59,15 @@ class Project:
         self.status = "pending"
 
     def create_project(self):
-        data_to_append = [self.project_id_num, self.title, self.lead_member, self.member1, self.member2, self.advisor, self.status]
-        file = open('project.csv', 'a', newline='')
+        project_data_dict.append({'ProjectID': f"{self.project_id_num}",'Title': f"{self.title}",
+                                'Lead': f"{self.lead_member}","Member1": f"{self.member1}","Member2": f"{self.member2}","Advisor": f"{self.advisor}",
+                                "Status": f"{self.status}"})
+        file = open('project.csv', 'w', newline='')
         writer = csv.writer(file)
-        writer.writerow(data_to_append)
+        writer.writerow(['ProjectID','Title','Lead','Member1','Member2','Advisor','Status'])
+        for dictionary in project_data_dict:
+            writer.writerow(dictionary.values())
+        file.close()
 
 
 class Invite:
@@ -60,17 +80,45 @@ class Invite:
         self.response_date = response_date
 
     def create_invite_member(self):
-        data_to_append = [self.project_id, self.inviter, self.to_be_member, self.response, self.response_date]
-        file = open('member_pending_request.csv', 'a', newline='')
+        member_pending_request_dict.append({'ProjectID': f"{self.project_id}", 'Inviter': f"{self.inviter}",
+                                  'to_be_member': f"{self.to_be_member}", "Response": f"{self.response}",
+                                  "Response_date": f"{self.response_date}"})
+        file = open('member_pending_request.csv', 'w', newline='')
         writer = csv.writer(file)
-        writer.writerow(data_to_append)
+        writer.writerow(["ProjectID","Inviter","to_be_member","Response","Response_date"])
+        for dictionary in member_pending_request_dict:
+            writer.writerow(dictionary.values())
+        file.close()
 
     def create_invite_advisor(self):
-        data_to_append = [self.project_id, self.to_be_advisor, self.response, self.response_date]
-        file = open('advisor_pending_request.csv', 'a', newline='')
+        advisor_pending_request_dict.append(
+            {'ProjectID': f"{self.project_id}", 'Inviter': f"{self.inviter}",
+             'to_be_member': f"{self.to_be_advisor}", "Response": f"{self.response}",
+             "Response_date": f"{self.response_date}"})
+        file = open('advisor_pending_request.csv', 'w', newline='')
         writer = csv.writer(file)
-        writer.writerow(data_to_append)
-# define a funcion called login
+        writer.writerow(["ProjectID", "Inviter", "to_be_advisor", "Response", "Response_date"])
+        for dictionary in advisor_pending_request_dict:
+            writer.writerow(dictionary.values())
+        file.close()
+
+
+class ConfirmInvite:
+    def __init__(self, project_id):
+        self.project_id = project_id
+
+    def respond_invite_member(self):
+        for i in member_pending_request_dict:
+            if i["ProjectID"] == self.project_id:
+                print(i)
+                ans = input("enter accepted or denied: ")
+                i.update({"Response": ans})
+        file = open('member_pending_request.csv', 'w', newline='')
+        writer = csv.writer(file)
+        writer.writerow(["ProjectID", "Inviter", "to_be_member", "Response", "Response_date"])
+        for dictionary in member_pending_request_dict:
+            writer.writerow(dictionary.values())
+        file.close()
 
 
 # here are things to do in this function:
@@ -97,17 +145,4 @@ def exits():
 
 # based on the return value for login, activate the code that performs activities according to the role defined for that person_id
 
-# if val[1] = 'admin':
-#     see and do admin related activities
-# elif val[1] = 'student':
-#     see and do student related activities
-# elif val[1] = 'member':
-#     see and do member related activities
-# elif val[1] = 'lead':
-#     see and do lead related activities
-# elif val[1] = 'faculty':
-#     see and do faculty related activities
-# elif val[1] = 'advisor':
-#     see and do advisor related activities
 
-# once everyhthing is done, make a call to the exit function
