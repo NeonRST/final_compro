@@ -66,7 +66,7 @@
   | Role/Type | Action                                                          | Method/Function                                                                              | Class            | Completion |
   |-----------|-----------------------------------------------------------------|----------------------------------------------------------------------------------------------|------------------|-----------:|
   | System    | checks username and password from the .csv to grant user access | def login():                                                                                 | None             |       100% |
-  | student   | Object Constructor for Projects                                 | def __init__(self,                                                                           | Project          |       100% |
+  | student   | Object Constructor for Projects                                 | def __init__(self), (attributes too long)                                                    | Project          |       100% |
   | student   | adding information to project.csv files                         | def create_project(self):                                                                    | Project          |       100% |
   | student   | Object Constructor for invites                                  | def __init__(self, project_id, inviter, to_be,response,response_date):                       | Invite           |       100% |
   | student   | adding information to member_pending_request.csv files          | def create_invite_member(self):                                                              | Invite           |       100% |
