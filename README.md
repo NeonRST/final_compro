@@ -63,27 +63,27 @@
  **project_manage.py**
   - this file is used for storing the different classes for different uses
   - 
-  | Role/Type | Action                                                          | Method/Function                                                                                                      | Class            | Completion |
-  |-----------|-----------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------|------------------|-----------:|
-  | System    | checks username and password from the .csv to grant user access | def login():                                                                                                         | None             |       100% |
-  | student   | Object Constructor for Projects                                 | def __init__(self, project_id_num=000, title="", lead_member="", member1="", member2="",advisor="", information=""): | Project          |       100% |
-  | student   | adding information to project.csv files                         | def create_project(self):                                                                                            | Project          |       100% |
-  | student   | Object Constructor for invites                                  | def __init__(self, project_id, inviter, to_be,response,response_date):                                               | Invite           |       100% |
-  | student   | adding information to member_pending_request.csv files          | def create_invite_member(self):                                                                                      | Invite           |       100% |
-  | student   | adding information to advisor_pending_request.csv files         | def create_invite_advisor(self):                                                                                     | Invite           |       100% |
-  | faculty   | Object Constructor for ConfirmInvite                            | def __init__(self, project_id, status=""):                                                                           | ConfirmInvite    |       100% |
-  | faculty   | confirming member_pending_request.csv files                     | def respond_invite_member(self):                                                                                     | ConfirmInvite    |       100% |
-  | faculty   | confirming advisor_pending_request.csv files                    | def respond_invite_advisor(self):                                                                                    | ConfirmInvite    |       100% |
-  | faculty   | typing opinion for projects                                     | def respond_status(self):                                                                                            | ConfirmInvite    |       100% |
-  | admin     | Object Constructor for AddLogin                                 | def __init__(self, userid, username="", userpassword="", userrole=""):                                               | AddLogin         |       100% |
-  | admin     | creates data for login.csv                                      | def create_data(self):                                                                                               | AddLogin         |       100% |
-  | admin     | delete data for login.csv                                       | def delete_data(self):                                                                                               | AddLogin         |       100% |
-  | admin     | Object Constructor for AddProject                               | def __init__(self, project_id, title, lead, member1, member2, advisor, status, information):                         | AddProject       |       100% |
-  | admin     | create data                                                     | def create_data(self):                                                                                               | AddProject       |       100% |
-  | admin     | delete data                                                     | def delete_data(self):                                                                                               | AddProject       |       100% |
-  | admin     | Object Constructor for NewInformation                           | def __init__(self, pj_id, new_info):                                                                                 | NewInformation   |       100% |
-  | admin     | info updater                                                    | def change_info(self):                                                                                               | NewInformation   |       100% |
-  | admin     | info getter                                                     | def info_read(self):                                                                                                 | NewInformation   |       100% |
+  | Role/Type | Action                                                          | Method/Function                                                                              | Class            | Completion |
+  |-----------|-----------------------------------------------------------------|----------------------------------------------------------------------------------------------|------------------|-----------:|
+  | System    | checks username and password from the .csv to grant user access | def login():                                                                                 | None             |       100% |
+  | student   | Object Constructor for Projects                                 | def __init__(self,                                                                           | Project          |       100% |
+  | student   | adding information to project.csv files                         | def create_project(self):                                                                    | Project          |       100% |
+  | student   | Object Constructor for invites                                  | def __init__(self, project_id, inviter, to_be,response,response_date):                       | Invite           |       100% |
+  | student   | adding information to member_pending_request.csv files          | def create_invite_member(self):                                                              | Invite           |       100% |
+  | student   | adding information to advisor_pending_request.csv files         | def create_invite_advisor(self):                                                             | Invite           |       100% |
+  | faculty   | Object Constructor for ConfirmInvite                            | def __init__(self, project_id, status=""):                                                   | ConfirmInvite    |       100% |
+  | faculty   | confirming member_pending_request.csv files                     | def respond_invite_member(self):                                                             | ConfirmInvite    |       100% |
+  | faculty   | confirming advisor_pending_request.csv files                    | def respond_invite_advisor(self):                                                            | ConfirmInvite    |       100% |
+  | faculty   | typing opinion for projects                                     | def respond_status(self):                                                                    | ConfirmInvite    |       100% |
+  | admin     | Object Constructor for AddLogin                                 | def __init__(self, userid, username="", userpassword="", userrole=""):                       | AddLogin         |       100% |
+  | admin     | creates data for login.csv                                      | def create_data(self):                                                                       | AddLogin         |       100% |
+  | admin     | delete data for login.csv                                       | def delete_data(self):                                                                       | AddLogin         |       100% |
+  | admin     | Object Constructor for AddProject                               | def __init__(self, project_id, title, lead, member1, member2, advisor, status, information): | AddProject       |       100% |
+  | admin     | create data                                                     | def create_data(self):                                                                       | AddProject       |       100% |
+  | admin     | delete data                                                     | def delete_data(self):                                                                       | AddProject       |       100% |
+  | admin     | Object Constructor for NewInformation                           | def __init__(self, pj_id, new_info):                                                         | NewInformation   |       100% |
+  | admin     | info updater                                                    | def change_info(self):                                                                       | NewInformation   |       100% |
+  | admin     | info getter                                                     | def info_read(self):                                                                         | NewInformation   |       100% |
 
  **role_access.py**
   -this file is used for storing the 3 classes for Admin, Student and Faculty
