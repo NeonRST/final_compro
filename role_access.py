@@ -1,6 +1,7 @@
+"""this module is for each role's access"""
 import sys
-import project_manage
 import datetime
+import project_manage
 from csv_extract import CSV
 
 login_data = CSV('login.csv')
@@ -16,12 +17,8 @@ advisor_pending_request = CSV('advisor_pending_request.csv')
 _advisor_pending_request_dict = CSV.csv_dict(advisor_pending_request)
 
 
-class Default:
-    def __init__(self):
-        pass
-
-
 class Admin:
+    """Object for admin"""
     def __init__(self, login_data_sys, login_data_dict=_login_data_dict,
                  project_data_dict=_project_data_dict
                  , member_pending_request_dict=_member_pending_request_dict,
@@ -36,53 +33,63 @@ class Admin:
 
     @property
     def login_data_x(self):
+        """getter"""
         return self.login_data_dict
 
     @login_data_x.setter
     def login_data_x(self, new_data):
+        """setter"""
         self.login_data_dict = new_data
 
     @property
     def person_data(self):
+        """getter"""
         return self.person_data_dict
 
     @person_data.setter
     def person_data(self, new_data):
+        """setter"""
         self.project_data_dict = new_data
 
     @property
     def project_data(self):
+        """getter"""
         return _project_data_dict
 
     @project_data.setter
     def project_data(self, new_data):
+        """setter"""
         self.project_data_dict = new_data
 
     @property
     def member_invite_data(self):
+        """getter"""
         return self.member_pending_request_dict
 
     @member_invite_data.setter
     def member_invite_data(self, new_data):
+        """setter"""
         self.member_pending_request_dict = new_data
 
     @property
     def advisor_invite_data(self):
+        """getter"""
         return self.advisor_pending_request_dict
 
     @advisor_invite_data.setter
     def advisor_invite_data(self, new_data):
+        """setter"""
         self.advisor_pending_request_dict = new_data
 
     def page_admin(self):
-        print("what would you like to do see")
+        """method for Admin use"""
         print("1.check all login data:")
         print("2.check all persons data:")
         print("3.check all project data:")
         print("4.check all member invite data:")
         print("5.check all advisor invite data:")
         print("6.Exit:")
-        admin_input_1 = input("input number here: ")
+        admin_input_1 = input("input enter input here: ")
         if admin_input_1 == "6":
             sys.exit()
         if admin_input_1 == "1":
@@ -90,37 +97,38 @@ class Admin:
             print("1.Read all files:")
             print("2. Add a File")
             print("3. Delete a File")
-            fl = input("what would you like to do?")
-            if fl == "1":
+            fl_temp_val1 = input("what would you like to do?")
+            if fl_temp_val1 == "1":
                 print()
                 print()
                 print(self.login_data_x)
                 print()
                 print()
-            if fl == "2":
+            if fl_temp_val1 == "2":
                 print("type data you would like to add:")
-                k1 = input("input a 7 digit ID (example.1234567)")
+                temp_val1 = input("input a 7 digit ID (example.1234567)")
                 while True:
-                    if k1 in self.login_data_dict["ID"]:
+                    if temp_val1 in self.login_data_dict["ID"]:
                         print("this ID already exists")
                         print("please type a new ID")
-                        k1 = input("input a 7 digit ID (example. Neon)")
+                        temp_val1 = input("input a 7 digit ID (example. Neon)")
                     else:
                         break
-                k2 = input("input a username (example.1234567)")
+                temp_val2 = input("input a username (example.1234567)")
                 while True:
-                    if k2 in self.login_data_dict["username"]:
+                    if temp_val2 in self.login_data_dict["username"]:
                         print("this username already exists")
                         print("please type a new username")
-                        k2 = input("input a new username (example. Neon1)")
+                        temp_val2 = input("input a new username (example. Neon1)")
                     else:
                         break
-                k3 = input("input a password (example.123456789)")
+                temp_val3 = input("input a password (example.123456789)")
                 print("roles available right now (admin, student, faculty): ")
-                k4 = input("what role would you like this user to have?: ")
-                temp_login_data = project_manage.AddLogin(k1, k2, k3, k4)
+                temp_val4 = input("what role would you like this user to have?: ")
+                temp_login_data = project_manage.AddLogin(temp_val1, temp_val2, temp_val3,
+                                                          temp_val4)
                 temp_login_data.create_data()
-            if fl == "3":
+            if fl_temp_val1 == "3":
                 print("what data would you like to delete:")
                 delete_login = input("enter the ID you would like to delete")
                 login_del = project_manage.AddLogin(delete_login)
@@ -136,36 +144,42 @@ class Admin:
             print("1.Read all files:")
             print("2. Add a File")
             print("3. Delete a File")
-            fl = input("what would you like to do?")
-            if fl == "1":
+            fl_temp_val1 = input("what would you like to do?")
+            if fl_temp_val1 == "1":
                 print()
                 print()
                 print(self.project_data_dict)
                 print()
                 print()
-            if fl == "2":
+            if fl_temp_val1 == "2":
                 print("enter a valid ProjectID (ex.PJ69), also dont make duplicate ProjectIDs:")
-                k1 = input("enter PJ: ")
+                temp_val1 = input("enter PJ: ")
                 while True:
-                    if k1 in self.project_data_dict["ProjectID"]:
+                    if temp_val1 in self.project_data_dict["ProjectID"]:
                         print("this ProjectID already exists")
                         print("please type a new ID")
-                        k1 = input("enter a valid ProjectID "
+                        temp_val1 = input("enter a valid ProjectID "
                                    "(ex.PJ69), also dont make duplicate ProjectIDs:")
                     else:
                         break
-                k2 = input("input a Title: ")
-                k3 = input("input Lead: ")
-                k4 = input("input Member1: ")
-                k5 = input("input Member2: ")
-                k6 = input("input Advisor: ")
-                k7 = input("input status: ")
-                temp_project_data = project_manage.AddProject(k1, k2, k3, k4, k5, k6, k7)
+                temp_val2 = input("input a Title: ")
+                temp_val3 = input("input Lead: ")
+                temp_val4 = input("input Member1: ")
+                temp_val5 = input("input Member2: ")
+                temp_val6 = input("input Advisor: ")
+                temp_val7 = input("input status: ")
+                temp_val8 = input("input information: ")
+                temp_project_data = project_manage.AddProject(temp_val1, temp_val2, temp_val3,
+                                                              temp_val4, temp_val5, temp_val6,
+                                                              temp_val7, temp_val8)
                 temp_project_data.create_data()
-            if fl == "3":
+            if fl_temp_val1 == "3":
                 print("what data would you like to delete:")
-                delete_project= input("enter the ID you would like to delete")
-                project_del = project_manage.AddProject(delete_project)
+                delete_project = input("enter the ID you would like to delete")
+                project_del = project_manage.AddProject(delete_project, "", "",
+                                                        "",
+                                                        "", "", "",
+                                                        "")
                 project_del.delete_data()
         if admin_input_1 == "4":
             print()
@@ -180,11 +194,9 @@ class Admin:
             print()
             print()
 
-    def add(self):
-        pass
-
 
 class Student:
+    """Student object class"""
     def __init__(self, login_data_sys, login_data_dict=_login_data_dict,
                  project_data_dict=_project_data_dict
                  ,member_pending_request_dict=_member_pending_request_dict,
@@ -196,12 +208,11 @@ class Student:
         self.advisor_pending_request_dict = advisor_pending_request_dict
 
     def page1(self):
+        """method for student page1"""
         run = True
         page1_1 = True
         page1_2 = False
-        page1_2_3 = False
         page1_2_2 = False
-        page1_2_1 = False
         main_choose = 0
         while run:
             status_student = ""
@@ -210,9 +221,9 @@ class Student:
                 print("current projects:")
                 for i in self.project_data_dict:
                     if self.login_data["ID"] in [i["Lead"], i["Member1"], i["Member2"]]:
-                        print(f"ProjectID:" + " " + i["ProjectID"] + " " +
-                              f"Title:" + " " + i["Title"] + " " +
-                              f"Status" + " " + i["Status"])
+                        print("ProjectID:" + " " + i["ProjectID"] + " " +
+                              "Title:" + " " + i["Title"] + " " +
+                              "Status" + " " + i["Status"])
                         print("Project Proposal information: " + i["information"])
                     if self.login_data["ID"] == i["Lead"]:
                         status_student = "lead"
@@ -237,7 +248,7 @@ class Student:
                         if (self.login_data["ID"] == member_dict["to_be_member"]
                                 and member_dict["Response"] == "pending"):
                             temp_invite_val += 1
-                            print(f"invite for project:" + " " + member_dict["ProjectID"]
+                            print("invite for project:" + " " + member_dict["ProjectID"]
                                   + " " + "by: "
                                   + member_dict["Inviter"])
                     page1_2_3 = True
@@ -255,34 +266,33 @@ class Student:
                     access_project = input("enter code (ex.(PJ0)): ")
                     for project_dict in self.project_data_dict:
                         if project_dict["ProjectID"] == access_project:
-                            k1 = 0
-                            k2 = 0
-                            k3 = 0
+                            temp_val1 = 0
+                            temp_val2 = 0
+                            temp_val3 = 0
                             print("ProjectID: " + project_dict["ProjectID"])
                             print("Project Title: " + project_dict["Title"])
                             for i in _persons_data_dict:
                                 if i["ID"] == project_dict["Lead"]:
                                     print("Lead Member: " + i["first"] + " " + i["last"])
-                                    k1 = 1
-                            if k1 == 0:
+                                    temp_val1 = 1
+                            if temp_val1 == 0:
                                 print("Lead Member: None")
                             for i in _persons_data_dict:
                                 if i["ID"] == project_dict["Member1"]:
                                     print("Member1: " + i["first"] + " " + i["last"])
-                                    k2 = 1
-                            if k2 == 0:
+                                    temp_val2 = 1
+                            if temp_val2 == 0:
                                 print("Member1: None")
                             for i in _persons_data_dict:
                                 if i["ID"] == project_dict["Member2"]:
                                     print("Member2: " + i["first"] + " " + i["last"])
-                                    k3 = 1
-                            if k3 == 0:
+                                    temp_val3 = 1
+                            if temp_val3 == 0:
                                 print("Member2: None")
                             print("Advisor: " + project_dict["Advisor"])
                             print("Project info: " + project_dict["information"])
                             print("Project Status: " + project_dict["Status"])
                             page1_2_2 = True
-                            page1_2 = False
                     while page1_2_2:
                         if status_student == "lead":
                             print()
@@ -352,10 +362,11 @@ class Student:
                     # member1, member2, advisor)
                     # project.create_project()
                 else:
-                    return True, ""
+                    return True
 
 
 class Faculty:
+    """Faculty class"""
     def __init__(self, login_data_sys, login_data_dict=_login_data_dict,
                  project_data_dict=_project_data_dict
                  , member_pending_request_dict=_member_pending_request_dict,
@@ -369,6 +380,7 @@ class Faculty:
         self.person_data_dict = person_data_dict
 
     def page_faculty(self):
+        """faculty UI"""
         print("--------------------------")
         print("what would you like to do?")
         print("1.check invites")
@@ -381,7 +393,7 @@ class Faculty:
                 if (self.login_data["ID"] == advisor_dict["to_be_advisor"] and
                         advisor_dict["Response"] == "pending"):
                     print(
-                        f"invite for project:" + " " + advisor_dict["ProjectID"] + " " + "by:" + " "
+                        "invite for project: " + advisor_dict["ProjectID"] + " " + "by:" + " "
                         + advisor_dict["Inviter"])
             page1_2_3 = True
             while page1_2_3:
@@ -390,7 +402,8 @@ class Faculty:
                 temp_com.respond_invite_advisor()
                 page1_2_3 = False
         if main_choose == 2:
-            for j in range(len(self.project_data_dict)):
+            project_data_dict_size = len(self.project_data_dict)
+            for j in range(project_data_dict_size):
                 if self.login_data["ID"] == self.project_data_dict[j]["Advisor"]:
                     print("ProjectID: " + self.project_data_dict[j]["ProjectID"])
                     print("Title: " + self.project_data_dict[j]["Title"])
@@ -409,9 +422,6 @@ class Faculty:
         if main_choose == 3:
             sys.exit()
 
-
-
-
-
-
-
+    def read_person(self):
+        """return person dict"""
+        return self.person_data_dict

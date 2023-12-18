@@ -8,7 +8,6 @@ while RUN:
     RUN_SYSTEM = x[0]
     user_sys = x[1]
     while RUN_SYSTEM:
-        USER = role_access.Default
         if user_sys["role"] == "student":
             print("Logged in as student")
             USER = role_access.Student(user_sys)

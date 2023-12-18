@@ -294,8 +294,8 @@ class NewInformation:
         for i in range(project_data_dict_size):
             if project_data_dict[i]["ProjectID"] == self.pj_id:
                 project_data_dict[i].update({"information": self.new_info})
-        with open('project.csv', 'w', newline='') as file:
-            writer = csv.writer(file)
+        file = open('project.csv', 'w', newline='')
+        writer = csv.writer(file)
         writer.writerow(['ProjectID', 'Title', 'Lead', 'Member1', 'Member2', 'Advisor', 'Status',
                          'information'])
         for dictionary in project_data_dict:
