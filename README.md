@@ -85,8 +85,30 @@
   | admin     | info updater                                                    | def change_info(self):                                                                                               | NewInformation   |       100% |
   | admin     | info getter                                                     | def info_read(self):                                                                                                 | NewInformation   |       100% |
 
+ **role_access.py**
+  -
+  -
+  | Role/Type | Action                         | Method/Function                                                                  | Class       | Completion |
+  |-----------|--------------------------------|----------------------------------------------------------------------------------|-------------|-----------:|
+  | Admin     | Object Constructor for Admin   | def __init__(self, login_data_sys, login_data_dict=_login_data_dict,             | Admin       |        65% |
+  | Admin     | getter for login_data_x        | def login_data_x(self):                                                          | Admin       |       100% |
+  | Admin     | setter for login_data_x        | def login_data_x(self):                                                          | Admin       |       100% |
+  | Admin     | getter for person_data         | def person_data(self):                                                           | Admin       |       100% |
+  | Admin     | setter for person_data         | def person_data(self):                                                           | Admin       |       100% |
+  | Admin     | getter for project_data        | def project_data(self):                                                          | Admin       |       100% |
+  | Admin     | setter for project_data        | def project_data(self):                                                          | Admin       |       100% |
+  | Admin     | getter for member_invite_data  | def member_invite_data(self):                                                    | Admin       |       100% |
+  | Admin     | setter for member_invite_data  | def member_invite_data(self):                                                    | Admin       |       100% |
+  | Admin     | getter for advisor_invite_data | def advisor_invite_data(self):                                                   | Admin       |       100% |
+  | Admin     | setter for advisor_invite_data | def advisor_invite_data(self):                                                   | Admin       |       100% |
+  | Admin     | Admin UI                       | def page_admin(self):                                                            | Admin       |        65% |
+  | Student   | Object Constructor for Student | def __init__(self, login_data_sys, login_data_dict=_login_data_dict,             | Student     |       100% |
+  | Student   | Student UI                     | def page1(self):                                                                 | Student     |        80% |
+  | faculty   | Object Constructor for faculty | def def __init__(self, login_data_sys, login_data_dict=_login_data_dict,:        | Faculty     |        90% |
+  | faculty   | Faculty  UI                    | def def page_faculty(self):                                                      | Faculty     |        80% |
+  | faculty   | persons getter                 | def def read_person(self):                                                       | Faculty     |       100% |
 # Missing feature 
   - #### Let member able to leave group.
   - #### Letting admins change the user invite rows in .csv files
-  - ### three member evaluation for confirmation
-
+  - #### three member evaluation for confirmation
+  - #### Admin full access
