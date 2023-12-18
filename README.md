@@ -1,9 +1,10 @@
 # Final project for 2023's 219114/115 Programming I
+   - Senior project managing program
 
 # Dev Notes
 * **info**
-   - if for some reason the project has any problems what so ever pls contact me via DM in Discord (while pylint checking an error could have occur)
-   - 
+   - if for some reason the project has any problems what so ever please get in touch with me via DM in Discord (while pylint checking an error could have occurred)
+   - the system is functional to some degree, but loopholes could be present due to time constraints not all bugs were accounted for (pls comment the errors or problems in private comments in GC)
 # List of Files
  * **Python Files**
      - **main.py**
@@ -20,7 +21,7 @@
          - `class Faculty` (main functions for Faculty)
 
 * **How to run my project**
-    - run main.py and use a user and is fine
+    - run main.py and use a user and it is fine
     * **test users**
     - 0000000,a,1,student
     - 1111111,b,1,student
