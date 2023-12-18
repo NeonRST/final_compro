@@ -1,15 +1,23 @@
 # Final project for 2023's 219114/115 Programming I
 
-* **List of Files**
-    * **Python Files**
-        - **main.py**
-            - Main file to run 
-        - **project_manage.py**
-            - `class Project` (creates projects)
-            - `class Invite` (creates invites)
-            - `class ConfirmInvite` (Confirm invites)
-        - **csv_extract.py**
-            - `class CSV` (extract CSV files)
+# Dev Notes
+* **info**
+   - if for some reason the project has any problems what so ever pls contact me via DM in Discord (while pylint checking an error could have occur)
+   - 
+# List of Files
+ * **Python Files**
+     - **main.py**
+         - Main file to run 
+     - **project_manage.py**
+         - `class Project` (creates projects)
+         - `class Invite` (creates invites)
+         - `class ConfirmInvite` (Confirm invites)
+     - **csv_extract.py**
+         - `class CSV` (extract CSV files)
+     - **allow_access.py**
+         - `class Admin` (main functions for admin)
+         - `class Student` (main functions for students)
+         - `class Faculty` (main functions for Faculty)
 
 * **How to run my project**
     - run main.py and use a user and is fine
@@ -34,3 +42,5 @@
 | member  | update data                                  | project.csv    | student |       100% |
 | faculty | accept invites                               | none           | faculty |       100% |
 | advisor | give opinions on proposals                   | project.csv    | faculty |       100% |
+
+
