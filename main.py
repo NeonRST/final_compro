@@ -1,32 +1,23 @@
-import sys
-
+"""this is the main file for the senior project management system"""
 import project_manage
 import role_access
-from csv_extract import CSV
 
-run = True
-while run:
+RUN = True
+while RUN:
     x = project_manage.login()
-    run_system = x[0]
+    RUN_SYSTEM = x[0]
     user_sys = x[1]
-    while run_system:
-        user = role_access.Default
+    while RUN_SYSTEM:
+        USER = role_access.Default
         if user_sys["role"] == "student":
-            print("accessed as student")
-            user = role_access.Student(user_sys)
-            page1 = user.page1()
-            student_edit = True
+            print("Logged in as student")
+            USER = role_access.Student(user_sys)
+            USER.page1()
         if user_sys["role"] == "admin":
-            print("accessed as Admin")
-            user = role_access.Admin(user_sys)
-            page1 = user.page_admin()
+            print("Logged in as Admin")
+            USER = role_access.Admin(user_sys)
+            USER.page_admin()
         if user_sys["role"] == "faculty":
-            print("accessed as faculty")
-            user = role_access.Faculty(user_sys)
-            page1 = user.page_faculty()
-
-
-
-
-
-
+            print("Logged in as faculty")
+            USER = role_access.Faculty(user_sys)
+            USER.page_faculty()
