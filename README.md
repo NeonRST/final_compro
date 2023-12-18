@@ -1,5 +1,4 @@
 # Final project for 2023's 219114/115 Programming I
-# Final project for 2023's 219114/115 Programming I
 
 * **List of Files**
     * **Python Files**
