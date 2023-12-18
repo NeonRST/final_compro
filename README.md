@@ -86,7 +86,7 @@
   | admin     | info getter                                                     | def info_read(self):                                                                                                 | NewInformation   |       100% |
 
  **role_access.py**
-  -
+  -this file is used for storing the 3 classes for Admin, Student and Faculty
   -
   | Role/Type | Action                         | Method/Function                                                                  | Class       | Completion |
   |-----------|--------------------------------|----------------------------------------------------------------------------------|-------------|-----------:|
